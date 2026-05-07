@@ -126,52 +126,117 @@
             </div>
         </header>
 
-        <section id="apps" class="max-w-6xl mx-auto px-6 py-20 border-t border-lime-900/30">
-            <h2 class="text-4xl mb-12 flex items-center gap-4">
-                <span class="bg-lime-900/30 px-4 py-1">AVAILABLE_APPS</span>
-            </h2>
+<!--APPS_SECTION------->
+        
+       <section id="apps" class="max-w-6xl mx-auto px-6 py-20 border-t border-lime-900/30">
+    <h2 class="text-4xl mb-12 flex items-center gap-4">
+        <span class="bg-lime-900/30 px-4 py-1">AVAILABLE_APPS</span>
+        <span class="text-2xl opacity-60">
+            <i class="fa-brands fa-android"></i> = Android |
+            <i class="fa-brands fa-apple"></i> = iOS |
+            <i class="fa-solid fa-desktop"></i> = Desktop
+        </span>
+    </h2>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="group p-8 border border-lime-900/50 bg-black/40 hover:border-lime-400 transition-all">
-                    <div class="flex justify-between items-center mb-6">
-                        <i class="fa-brands fa-android text-3xl"></i>
-                        <span class="text-sm bg-lime-900/50 px-2 uppercase">GPLv3</span>
-                    </div>
-                    <h3 class="text-4xl font-bold mb-4 group-hover:text-white transition uppercase">Odysee</h3>
-                    <p class="text-2xl text-lime-700 leading-tight mb-8">A Youtube Alternative</p>
-                    <div class="flex flex-col gap-2">
-                        <a href="#" class="border border-lime-400 text-center py-1 text-2xl hover:bg-lime-400 hover:text-black transition">Visit Site</a>
-                        <a href="#" class="text-center py-1 text-xl opacity-60 hover:opacity-100 transition underline">VIEW_SOURCE_CODE</a>
-                    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Odysee Card -->
+        <div class="group p-8 border border-lime-900/50 bg-black/40 hover:border-lime-400 transition-all">
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex gap-2">
+                    <i class="fa-brands fa-android text-2xl"></i>
+                    <i class="fa-brands fa-apple text-2xl"></i>
+                    <i class="fa-solid fa-desktop text-2xl"></i>
                 </div>
-
-                <div class="group p-8 border border-lime-900/50 bg-black/40 hover:border-lime-400 transition-all">
-                    <div class="flex justify-between items-center mb-6">
-                        <i class="fa-solid fa-desktop text-3xl"></i>
-                        <span class="text-sm bg-lime-900/50 px-2 uppercase">MIT</span>
-                    </div>
-                    <h3 class="text-4xl font-bold mb-4 group-hover:text-white transition uppercase">Gimp</h3>
-                    <p class="text-2xl text-lime-700 leading-tight mb-8">A Photoshop Alternative</p>
-                    <div class="flex flex-col gap-2">
-                        <a href="#" class="border border-lime-400 text-center py-1 text-2xl hover:bg-lime-400 hover:text-black transition">Visit Site</a>
-                        <a href="#" class="text-center py-1 text-xl opacity-60 hover:opacity-100 transition underline">VIEW_SOURCE_CODE</a>
-                    </div>
-                </div>
-
-                <div class="group p-8 border border-lime-900/50 bg-black/40 hover:border-lime-400 transition-all">
-                    <div class="flex justify-between items-center mb-6">
-                        <i class="fa-brands fa-apple text-3xl"></i>
-                        <span class="text-sm bg-lime-900/50 px-2 uppercase">BSD</span>
-                    </div>
-                    <h3 class="text-4xl font-bold mb-4 group-hover:text-white transition uppercase">KDEN Live</h3>
-                    <p class="text-2xl text-lime-700 leading-tight mb-8">Alternative Video Editing </p>
-                    <div class="flex flex-col gap-2">
-                        <a href="#" class="border border-lime-400 text-center py-1 text-2xl hover:bg-lime-400 hover:text-black transition">Visit Site</a>
-                        <a href="#" class="text-center py-1 text-xl opacity-60 hover:opacity-100 transition underline">VIEW_SOURCE_CODE</a>
-                    </div>
-                </div>
+                <span class="text-sm bg-lime-900/50 px-2 uppercase">MIT</span>
             </div>
-        </section>
+            
+            <h3 class="text-4xl font-bold mb-4 group-hover:text-white transition uppercase">Odysee</h3>
+
+            <!--Image Block -->
+            <div class="border border-lime-900/50 p-2 bg-black/40 mb-6">
+                <img 
+                    src="assets/images/Odysee_Icon.png"
+                    alt="Odysee Logo" 
+                    class="opacity-80 grayscale group-hover:grayscale-0 transition-all duration-500 w-full h-32 object-contain mx-auto"
+                >
+                <p class="text-xs mt-2 opacity-40 uppercase text-center">[ IMG_LOADED: ODYSEE_ICON ]</p>
+            </div>
+
+            <p class="text-2xl text-lime-700 leading-tight mb-8">A Youtube Alternative</p>
+            
+            <div class="flex flex-col gap-2">
+                <a href="https://odysee.com/" target="_blank" class="border border-lime-400 text-center py-1 text-2xl hover:bg-lime-400 hover:text-black transition">Visit Site</a>
+                <a href="https://github.com/OdyseeTeam/odysee-frontend" target="_blank" class="text-center py-1 text-xl opacity-60 hover:opacity-100 transition underline">VIEW_SOURCE_CODE</a>
+            </div>
+        </div>
+
+        <!-- Gimp Card -->
+        <div class="group p-8 border border-lime-900/50 bg-black/40 hover:border-lime-400 transition-all">
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex gap-2">
+                    <i class="fa-brands fa-android text-2xl"></i>
+                    <i class="fa-brands fa-apple text-2xl"></i>
+                    <i class="fa-solid fa-desktop text-2xl"></i>
+                </div>
+                <span class="text-sm bg-lime-900/50 px-2 uppercase">MIT</span>
+            </div>
+            
+            <h3 class="text-4xl font-bold mb-4 group-hover:text-white transition uppercase">Gimp</h3>
+
+            <!-- Image Block -->
+            <div class="border border-lime-900/50 p-2 bg-black/40 mb-6">
+                <img 
+                    src="assets/images/gimp_icon.png"
+                    alt="Odysee Logo" 
+                    class="opacity-80 grayscale group-hover:grayscale-0 transition-all duration-500 w-full h-32 object-contain mx-auto"
+                >
+                <p class="text-xs mt-2 opacity-40 uppercase text-center">[ IMG_LOADED: ODYSEE_ICON ]</p>
+            </div>
+
+            <p class="text-2xl text-lime-700 leading-tight mb-8">A Photoshop Alternative</p>
+            
+            <div class="flex flex-col gap-2">
+                <a href="https://odysee.com/" target="_blank" class="border border-lime-400 text-center py-1 text-2xl hover:bg-lime-400 hover:text-black transition">Visit Site</a>
+                <a href="https://github.com/OdyseeTeam/odysee-frontend" target="_blank" class="text-center py-1 text-xl opacity-60 hover:opacity-100 transition underline">VIEW_SOURCE_CODE</a>
+            </div>
+        </div>
+
+        
+        <!-- KDEN Live Card -->
+       <div class="group p-8 border border-lime-900/50 bg-black/40 hover:border-lime-400 transition-all">
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex gap-2">
+                    <i class="fa-brands fa-android text-2xl"></i>
+                    <i class="fa-brands fa-apple text-2xl"></i>
+                    <i class="fa-solid fa-desktop text-2xl"></i>
+                </div>
+                <span class="text-sm bg-lime-900/50 px-2 uppercase">MIT</span>
+            </div>
+            
+            <h3 class="text-4xl font-bold mb-4 group-hover:text-white transition uppercase">KDEN Live</h3>
+
+            <!--Image Block -->
+            <div class="border border-lime-900/50 p-2 bg-black/40 mb-6">
+                <img 
+                    src="assets/images/kden_live.png"
+                    alt="Odysee Logo" 
+                    class="opacity-80 grayscale group-hover:grayscale-0 transition-all duration-500 w-full h-32 object-contain mx-auto"
+                >
+                <p class="text-xs mt-2 opacity-40 uppercase text-center">[ IMG_LOADED: ODYSEE_ICON ]</p>
+            </div>
+
+            <p class="text-2xl text-lime-700 leading-tight mb-8">Alternative Video Editor</p>
+            
+            <div class="flex flex-col gap-2">
+                <a href="https://odysee.com/" target="_blank" class="border border-lime-400 text-center py-1 text-2xl hover:bg-lime-400 hover:text-black transition">Visit Site</a>
+                <a href="https://github.com/OdyseeTeam/odysee-frontend" target="_blank" class="text-center py-1 text-xl opacity-60 hover:opacity-100 transition underline">VIEW_SOURCE_CODE</a>
+            </div>
+        </div>
+</section>
+
+
+<!--footer--->
 
         <!-- TRIGGER AREA FOR THE ANIMATION -->
         <footer id="terminal-trigger" class="py-24 border-t border-lime-900/30 bg-black/40">
@@ -287,3 +352,9 @@ setInterval(updateClock, 1000);
     </script>
 </body>
 </html>
+
+
+
+
+        
+        
