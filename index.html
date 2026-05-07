@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turbobro_OS // v1.0.4</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Retro Terminal Font -->
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    
+    <style type="text/css">
+        body {
+            font-family: 'VT323', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        /* HIGH VISIBILITY RETRO GRADIENT */
+        .text-glow-fix {
+            background: linear-gradient(to bottom, #a3e635 0%, #fef08a 50%, #a3e635 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            filter: drop-shadow(0 0 15px rgba(163, 230, 53, 0.8));
+        }
+
+        /* CRT SCANLINE EFFECT */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* TERMINAL FLICKER */
+        @keyframes flicker {
+            0% { opacity: 0.97; }
+            5% { opacity: 0.95; }
+            10% { opacity: 0.99; }
+            100% { opacity: 1; }
+        }
+        .animate-flicker { animation: flicker 0.15s infinite; }
+
+        .bg-grid {
+            background-image: radial-gradient(circle, #166534 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.1;
+        }
+
+        @keyframes drift {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 0.3; }
+            100% { transform: translateY(-200px) translateX(30px); opacity: 0; }
+        }
+        .spore {
+            position: absolute; background: #a3e635; border-radius: 50%;
+            filter: blur(2px); pointer-events: none; animation: drift var(--d) linear infinite;
+        }
+
+        /* NEW: TYPING AREA STYLES */
+        #ascii-log {
+            white-space: pre;
+            line-height: 1.2;
+            min-height: 120px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: #a3e635;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body class="bg-[#020402] text-lime-400/90 m-0 p-0 overflow-x-hidden animate-flicker">
+
+    <div class="crt-overlay"></div>
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute inset-0 bg-grid"></div>
+        <div class="spore w-1 h-1" style="--d: 12s; top: 80%; left: 10%;"></div>
+        <div class="spore w-2 h-2" style="--d: 15s; top: 90%; left: 40%; animation-delay: 2s;"></div>
+        <div class="spore w-1 h-1" style="--d: 10s; top: 75%; left: 70%; animation-delay: 5s;"></div>
+    </div>
+
+    <div class="relative z-10">
+        <nav class="p-6 border-b border-lime-900/30 bg-[#020402]/80 backdrop-blur-sm">
+            <div class="max-w-6xl mx-auto flex justify-between items-center text-2xl">
+                <span class="font-bold flex items-center gap-3">
+                    <i class="fa-solid fa-mushroom"></i> Turbobro_OS
+                </span>
+                <div class="flex gap-8 text-xl uppercase">
+                    <a href="#apps" class="hover:bg-lime-500 hover:text-black px-2 transition">Apps</a>
+                    <a href="#" class="hover:bg-lime-500 hover:text-black px-2 transition">About</a>
+                    <a href="https://github.com" class="hover:text-white transition"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </nav>
+
+        <header class="max-w-6xl mx-auto px-6 py-24">
+            <div class="max-w-4xl">
+                <div class="text-xl mb-4 opacity-70 italic font-mono">
+                   <P>[Welcome status...ONLINE] > Welcome!</P> 
+                   <p>[Printing current date and time...] System Time: <span id="current-date"></span></p>
+                    
+                </div>
+                <h1 class="text-7xl lg:text-9xl font-normal leading-none text-white mb-8">
+                    The plan to <br>
+                    <span class="text-glow-fix uppercase">Change</span>
+                </h1>
+                <p class="text-3xl text-lime-200/70 leading-snug mb-10 max-w-2xl">
+                    Hello, and welcome to my website! This site is a work in progress and I plan to keep up on it for the forseeable future. Please visit from time to time to see updates and new software from the kind community that gives without expecting much in return.
+                </p>
+                <div class="flex gap-6">
+                    <a href="#apps" class="bg-lime-500 text-black px-8 py-2 text-3xl font-bold hover:invert transition">
+                        See APPS
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <section id="apps" class="max-w-6xl mx-auto px-6 py-20 border-t border-lime-900/30">
+            <h2 class="text-4xl mb-12 flex items-center gap-4">
+                <span class="bg-lime-900/30 px-4 py-1">AVAILABLE_APPS</span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group p-8 border border-lime-900/50 bg-black/40 hover:border-lime-400 transition-all">
+                    <div class="flex justify-between items-center mb-6">
+                        <i class="fa-brands fa-android text-3xl"></i>
+                        <span class="text-sm bg-lime-900/50 px-2 uppercase">GPLv3</span>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-4 group-hover:text-white transition uppercase">Odysee</h3>
+                    <p class="text-2xl text-lime-700 leading-tight mb-8">A Youtube Alternative</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="#" class="border border-lime-400 text-center py-1 text-2xl hover:bg-lime-400 hover:text-black transition">Visit Site</a>
+                        <a href="#" class="text-center py-1 text-xl opacity-60 hover:opacity-100 transition underline">VIEW_SOURCE_CODE</a>
+                    </div>
+                </div>
+
+                <div class="group p-8 border border-lime-900/50 bg-black/40 hover:border-lime-400 transition-all">
+                    <div class="flex justify-between items-center mb-6">
+                        <i class="fa-solid fa-desktop text-3xl"></i>
+                        <span class="text-sm bg-lime-900/50 px-2 uppercase">MIT</span>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-4 group-hover:text-white transition uppercase">Gimp</h3>
+                    <p class="text-2xl text-lime-700 leading-tight mb-8">A Photoshop Alternative</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="#" class="border border-lime-400 text-center py-1 text-2xl hover:bg-lime-400 hover:text-black transition">Visit Site</a>
+                        <a href="#" class="text-center py-1 text-xl opacity-60 hover:opacity-100 transition underline">VIEW_SOURCE_CODE</a>
+                    </div>
+                </div>
+
+                <div class="group p-8 border border-lime-900/50 bg-black/40 hover:border-lime-400 transition-all">
+                    <div class="flex justify-between items-center mb-6">
+                        <i class="fa-brands fa-apple text-3xl"></i>
+                        <span class="text-sm bg-lime-900/50 px-2 uppercase">BSD</span>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-4 group-hover:text-white transition uppercase">KDEN Live</h3>
+                    <p class="text-2xl text-lime-700 leading-tight mb-8">Alternative Video Editing </p>
+                    <div class="flex flex-col gap-2">
+                        <a href="#" class="border border-lime-400 text-center py-1 text-2xl hover:bg-lime-400 hover:text-black transition">Visit Site</a>
+                        <a href="#" class="text-center py-1 text-xl opacity-60 hover:opacity-100 transition underline">VIEW_SOURCE_CODE</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRIGGER AREA FOR THE ANIMATION -->
+        <footer id="terminal-trigger" class="py-24 border-t border-lime-900/30 bg-black/40">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                
+                <!-- THE TYPING ASCII ART AREA -->
+                <div id="ascii-log" class="text-lime-500 mb-8 text-left inline-block"></div>
+
+                <div class="text-2xl mt-4">
+                    <span class="opacity-50">user@turbobro:~$</span> <span id="status-msg">awaiting_scroll...</span><span class="cursor"></span>
+                </div>
+                
+                <div class="mt-12 opacity-30 text-xl">
+                    <p>*** END OF FILE // Turbobro_OS ***</p>
+                    <p class="text-sm">2026(C) RECLAIM YOUR DIGITAL LIFE</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+
+        function updateClock() {
+    const now = new Date();
+    
+    // Formats the date as: MON, MAY 5, 2026 - 20:14:26
+    const options = { 
+        weekday: 'short', 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit',
+        hour12: false 
+    };
+    
+    const datestring = now.toLocaleDateString('en-US', options).toUpperCase();
+    document.getElementById('current-date').innerText = datestring;
+}
+
+// Run it immediately
+updateClock();
+
+// Optional: Update it every second to make it a live clock
+setInterval(updateClock, 1000);
+
+
+
+        // Place your ASCII Art or message inside the backticks below
+        const terminalArt = `[SUCCESS] CONNECTION ESTABLISHED...
+[WARNING] Dangerous levels of fungus detected!
+[Protocol] Activating print of culprit...
+[SUCCESS] Please wait...
+
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡤⠒⠉⢀⣀⣤⣤⣄⣀⠈⠑⠢⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠋⢀⣴⣾⠿⠛⠛⠛⢛⠿⢿⣶⣤⣀⠉⠒⠤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⠁⢠⣾⠟⠁⠀⠀⠀⠀⠀⡄⠀⠈⠙⠿⣷⣦⣤⣀⣈⠉⠀⠒⠢⠤⢀⣀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠜⠁⣰⣿⢏⠖⠐⠢⡀⠀⠀⠀⠈⠒⠒⠒⠊⠀⠉⠙⠛⠿⠿⣷⣶⣦⣤⣄⠈⠙⠢⡀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠔⠁⣀⣼⡿⢣⠎⠀⠀⠀⣇⠀⠀⠀⠀⠀⠀⠀⢀⠔⠋⠉⠉⠓⢢⡀⠀⢹⠛⣿⢿⣦⡀⠙⡄⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢠⠞⠁⢠⣾⡿⢋⠜⠁⠀⠀⠀⢀⠏⠀⡴⠚⠙⠒⡄⠀⠈⢦⠀⠀⠀⠀⢀⡇⣰⠃⠀⠀⢥⢻⣷⠀⢹⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⠔⠁⢀⣼⡿⡏⠀⢸⡀⠀⠀⢀⡠⠞⠀⠘⣄⠀⠀⢀⠟⠀⠀⠀⠙⠂⠤⠤⣮⠜⠁⣀⡤⠔⠯⢿⢿⠀⢸⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⡰⠋⢀⣴⣿⣋⠴⠁⠀⠀⠉⠀⠈⠁⠀⠀⠀⠀⠈⠁⠒⠉⠀⠀⠀⠀⣀⣠⡴⠊⠁⢐⡞⠁⠀⠀⢀⣾⡿⠀⡼⠀⠀⠀⠀
+⠀⠀⠀⠀⣰⠁⢠⣿⠟⠀⠀⠀⠀⢠⠖⠐⢦⠀⠀⠀⠀⣀⢀⣀⣠⡤⠴⠒⠢⠈⠉⠀⠈⠀⠀⠀⢨⣣⣀⣤⣶⣿⠟⠁⡰⠃⠀⠀⠀⠀
+⠀⠀⠀⠀⡏⠀⣿⡏⠉⢢⠀⠀⠀⠸⢤⣠⠞⠀⣀⡤⢺⡁⠀⠈⡿⠃⠀⣀⣰⡷⣿⣟⣗⣲⣭⠭⠿⠟⠛⠋⠉⢀⡤⠚⠁⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣇⠀⣿⣇⢀⡜⠀⠀⠀⠀⠀⠀⣠⠾⠁⠀⢉⡻⣶⣾⣶⣿⠿⠛⠛⠋⠉⣿⡇⠀⡤⠤⠤⠐⠒⠚⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠘⡀⠘⢿⣧⣀⠀⠀⠀⠀⠀⡼⠁⣀⡤⣶⣾⣿⣿⠋⠁⠀⠀⠀⠀⠀⠀⢻⣇⠀⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠙⢄⠀⠙⠿⢿⣶⣶⣖⣾⡿⠿⠟⠛⠉⠁⢸⢹⠀⠀⠀⠀⠀⠀⠀⠀⢸⣸⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠉⠒⢤⣄⡀⢀⣀⠀⠠⠤⠔⠒⢸⠀⢸⢸⠀⠀⡠⠀⠀⠀⠲⣄⠘⣿⡇⠘⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⡴⠒⠉⣉⣈⠉⠑⢦⡀⠀⠀⠀⠀⢸⠀⢸⣾⢀⠎⠀⠀⠀⠀⠀⠈⠳⢿⣷⠀⢱⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⣠⠔⠚⠁⣀⣴⢟⣋⠙⠻⣦⡀⠑⢄⠀⠀⠀⢸⠀⣸⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠘⡿⡇⠈⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⡞⠀⣠⡶⢛⣋⠠⡁⢈⠗⣠⢼⢷⣄⡀⠑⡄⠀⡇⠀⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣷⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⢸⠀⢸⣿⡷⢧⣀⠇⠀⠀⠀⠑⠚⠀⠙⢷⡄⢸⢰⠃⢠⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡿⡇⠘⡆⠀⠀⣠⠤⠒⠒⠒⠂⠤⣄⠀⠀
+⠈⡄⠘⢷⣄⣀⣀⣀⣰⣏⡹⠀⠀⠀⢀⣼⠇⢸⠛⠀⣼⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢳⢧⠀⢃⡴⠊⢀⣠⡶⣶⣶⢶⣤⣀⠉⢲
+⠀⠙⠦⣀⣈⠉⠉⢹⡏⣿⠛⠶⠶⠶⠟⠁⣠⠎⡇⢀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠈⠀⣰⢿⣗⡄⠑⠊⠀⠉⣻⡇⠀
+⠀⠀⠀⠀⢈⠏⠀⣾⠀⣿⠀⠠⠀⠀⠐⠚⠁⢸⠁⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡇⠀⠘⣿⣄⣈⣐⣭⣦⣴⠾⠋⢀⡼
+⠀⠀⠀⠀⡞⠀⣼⠃⢰⡇⠀⡇⠀⠀⠀⠀⠀⢸⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⢰⡤⣀⡈⠉⢉⡟⠹⣧⠀⢰⠋⠀
+⠀⠀⠀⢰⠁⢰⠏⠀⢸⡇⠀⡇⠀⠀⠀⠀⠀⢸⡀⢸⣸⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡇⢸⠃⠀⢸⠁⢸⡇⠀⠹⣇⠀⡇⠀
+⠀⠀⠀⡟⠀⣿⠀⠀⢘⡇⠀⡇⠀⠀⠀⠀⠀⠀⡇⠈⢿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣻⠀⢸⠀⠀⠸⡆⠘⣧⠀⠀⣿⠀⡇⠀
+⠀⠀⠀⢷⠀⢿⣄⣀⣼⠇⢀⡇⠀⠀⠀⠀⠀⠀⠸⡄⠘⢿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣰⣿⠇⢠⠇⠀⠀⠀⢣⡀⠹⠦⠾⠋⢀⠇⠀
+⠀⠀⠀⠈⢦⡀⠉⠉⠁⣀⠞⠀⠀⠀⠀⠀⠀⠀⠀⠙⢆⡀⠙⠿⣷⣶⣤⣤⣤⣤⣴⣶⣿⠟⠁⣠⠎⠀⠀⠀⠀⠀⠑⠤⠤⠤⠴⠋⠀⠀
+⠀⠀⠀⠀⠀⠈⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠢⢄⣀⠈⠉⠉⠉⠉⠉⢁⣀⡤⠚⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+
+      \\` ;
+
+        let charIndex = 0;
+        const typingSpeed = 30; // lower is faster
+
+        function startTypewriter() {
+            if (charIndex < terminalArt.length) {
+                document.getElementById("ascii-log").innerHTML += terminalArt.charAt(charIndex);
+                charIndex++;
+                setTimeout(startTypewriter, typingSpeed);
+            }
+        }
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Update status text
+                    document.getElementById('status-msg').innerText = 'shutting_down...';
+                    // Start typing
+                    startTypewriter();
+                    // Stop watching once it's triggered
+                    scrollObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.6 }); // Triggers when 60% of footer is visible
+
+        scrollObserver.observe(document.getElementById('terminal-trigger'));
+    </script>
+</body>
+</html>
